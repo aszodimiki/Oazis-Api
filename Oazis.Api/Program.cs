@@ -9,6 +9,7 @@ builder.CreateUmbracoBuilder()
 .AddComposers()
     .Build();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+
 //builder.Services.AddDbContext<OazisContext>(options =>
 //    options.UseSqlite(builder.Configuration.GetConnectionString("OazisDatabase")));
 
@@ -25,6 +26,14 @@ builder.Services.AddCors(options =>
 WebApplication app = builder.Build();
 
 await app.BootUmbracoAsync();
+
+app.UseCors(builder =>
+{
+    builder
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+});
 
 app.UseAuthorization();
 app.UseUmbraco()

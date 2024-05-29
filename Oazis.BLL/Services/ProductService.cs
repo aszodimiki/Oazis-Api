@@ -35,14 +35,25 @@ namespace Oazis.BLL.Services
 
         public async Task<List<ProductDto>> GetProductsByType(string type)
         {
-            var rootSite = _publishedContentQuery.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == Domain.ModelsBuilder.Oazis.ModelTypeAlias);
-            var menuSite = rootSite?.Children.FirstOrDefault(x => x.ContentType.Alias == Menu.ModelTypeAlias);
-            //var productTypes2 = menuSite?.Children.Where(x => x.ContentType.Alias == Products.ModelTypeAlias).Select(x => new Products(x, _publishedValueFallback))?.FirstOrDefault(x => x.TypeOfProduct != null && x.TypeOfProduct.Any(t => new ProductType(t, _publishedValueFallback).TypeName == type));
-            var productTypes = menuSite?.Children.Where(x => x.ContentType.Alias == Products.ModelTypeAlias).Select(x => new Products(x, _publishedValueFallback))?.FirstOrDefault(x => new ProductType(x, _publishedValueFallback).TypeName == type);
-            var products = productTypes?.Children.Select(x => new Product(x, _publishedValueFallback));
+            try
+            {
+                var rootSite = _publishedContentQuery.ContentAtRoot().FirstOrDefault(x =>
+                    x.ContentType.Alias == Domain.ModelsBuilder.Oazis.ModelTypeAlias);
+                var menuSite = rootSite?.Children.FirstOrDefault(x => x.ContentType.Alias == Menu.ModelTypeAlias);
+                //var productTypes2 = menuSite?.Children.Where(x => x.ContentType.Alias == Products.ModelTypeAlias).Select(x => new Products(x, _publishedValueFallback))?.FirstOrDefault(x => x.TypeOfProduct != null && x.TypeOfProduct.Any(t => new ProductType(t, _publishedValueFallback).TypeName == type));
+                var productTypes = menuSite?.Children.Where(x => x.ContentType.Alias == Products.ModelTypeAlias)
+                    .Select(x => new Products(x, _publishedValueFallback))?.FirstOrDefault(x =>
+                        new ProductType(x, _publishedValueFallback).TypeName == type);
+                var products = productTypes?.Children.Select(x => new Product(x, _publishedValueFallback));
 
-            var productDtos = products.Select(x => _mapper.Map<ProductDto>(x)).ToList();
-            return productDtos;
+                var productDtos = products?.Select(x => _mapper.Map<ProductDto>(x)).ToList() ?? [];
+                return productDtos;
+            }
+            catch (Exception ex)
+            {
+                return [];
+            }
+
         }
     }
 }

@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/Oazis.Api/copilot-chat/6c762fcd
+/.vs/Oazis.Api/DesignTimeBuild
+/.vs/Oazis.Api/FileContentIndex
+/.vs/ProjectEvaluation
+/bin/Debug
+/.vs/Oazis.Api
+/obj

@@ -1,8 +1,5 @@
 ﻿using Oazis.BLL.Services.Interfaces;
 using Oazis.Domain.ModelsBuilder;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Web;

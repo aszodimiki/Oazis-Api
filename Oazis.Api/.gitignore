@@ -489,4 +489,3 @@ packages
 .DS_Store
 **/bin/
 **/obj/
-Oazis.Domain/**/obj/

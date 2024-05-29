@@ -4,7 +4,9 @@
     {
         public string ProductName { get; set; }
         public int Price { get; set; }
+        public int? SecondPrice { get; set; }
         public int SerialNumber { get; set; }
-        public IEnumerable<string> Ingredients { get; set; }
+        public IEnumerable<string>? Ingredients { get; set; }
+        public string ProductType { get; set; }
     }
 }

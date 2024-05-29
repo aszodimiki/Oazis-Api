@@ -4,6 +4,8 @@ using Oazis.Domain.Models;
 using Oazis.Domain.ModelsBuilder;
 using System.Globalization;
 using Umbraco.Cms.Core.Models.Blocks;
+using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Extensions;
 
 namespace Oazis.Domain.Mappings
 {
@@ -13,15 +15,10 @@ namespace Oazis.Domain.Mappings
         {
             CreateMap<Ingredient, IngredientDTO>();
 
-            CreateMap<Pizza, PizzaDTO>()
-                .ForMember(q => q.Ingredients, y => y.MapFrom(t => t.Ingredients.Select(x => x.Name)));
-
             CreateMap<ModelsBuilder.Product, ProductDto>()
-                .ForMember(q => q.Ingredients, y => y.MapFrom(t => t.Ingredients.Select(x => x.Name)));
-
-            CreateMap<Fried, FriedDTO>();
-
-            CreateMap<Hamburger, HamburgerDTO>();
+                .ForMember(q => q.Ingredients, y => y.MapFrom(t => t.Ingredients != null && t.Ingredients.Any() ? t.Ingredients.Select(x => x.Name) : Enumerable.Empty<string>()))
+                .ForMember(q => q.SerialNumber, y => y.MapFrom(t => t.SerialNumber != null ? t.SerialNumber : 0))
+                .ForMember(q => q.SecondPrice, y => y.MapFrom(t => t.SecondPrice != null ? t.SecondPrice : 0));
 
             CreateMap<ProductType, ProductTypeDTO>()
                 .ForMember(q => q.NameOfProduct, y => y.MapFrom(t => t.Name))
@@ -55,11 +52,11 @@ namespace Oazis.Domain.Mappings
                         var leftContent = leftPublished as GridRichText;
 
                         var right = src.Areas.FirstOrDefault(x => x.Alias == "right");
-                        var rightPublished = right.Select(x => x.Content).FirstOrDefault();
+                        var rightPublished = right?.Select(x => x.Content).FirstOrDefault();
                         var rightContent = rightPublished as GridRichText;
 
-                        dsc.LeftText = leftContent.RichText.ToString();
-                        dsc.RightText = rightContent.RichText.ToString();
+                        dsc.LeftText = leftContent?.RichText?.ToString();
+                        dsc.RightText = rightContent?.RichText?.ToString();
 
                     }
                     else if (src.Content.ContentType.Alias == GridRichText.ModelTypeAlias)

@@ -10,7 +10,6 @@ namespace Oazis.BLL.Composers
     {
         public void Compose(IUmbracoBuilder builder)
         {
-            builder.Services.AddScoped<IPizzaService, PizzaService>();
             builder.Services.AddScoped<ISiteService, SiteService>();
             builder.Services.AddScoped<IDetailService, DetailService>();
             builder.Services.AddScoped<IProductService, ProductService>();
