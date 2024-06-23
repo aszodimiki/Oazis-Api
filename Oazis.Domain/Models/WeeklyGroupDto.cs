@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace Oazis.Domain.Models
+﻿namespace Oazis.Domain.Models
 {
     public class WeeklyGroupDto
     {
+        public string WeeklyTitle { get; set; }
         public List<DailyMenuDto> DailyMenus { get; set; }
     }
 }

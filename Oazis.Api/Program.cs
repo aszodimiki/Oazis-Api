@@ -1,3 +1,5 @@
+
+
 using Oazis.Domain.Mappings;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -44,7 +46,7 @@ app.UseUmbraco()
     })
     .WithEndpoints(u =>
     {
-        u.UseInstallerEndpoints();
+        //u.UseInstallerEndpoints();
         u.UseBackOfficeEndpoints();
         u.UseWebsiteEndpoints();
     });

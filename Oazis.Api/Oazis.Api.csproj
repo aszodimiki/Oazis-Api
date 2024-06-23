@@ -7,25 +7,19 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.5">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
-    <PackageReference Include="Our.Umbraco.ConditionalDisplayers" Version="3.4.0" />
-    <PackageReference Include="Umbraco.Cms" Version="13.3.2" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Opt-in to app-local ICU to ensure consistent globalization APIs across different platforms -->
     <PackageReference Include="Microsoft.ICU.ICU4C.Runtime" Version="72.1.0.3" />
-    <PackageReference Include="Umbraco.Cms.Api.Delivery" Version="13.3.2" />
-    <PackageReference Include="Umbraco.Cms.PublishedCache.NuCache" Version="13.3.2" />
-    <PackageReference Include="Umbraco.Cms.StaticAssets" Version="13.3.2" />
-    <PackageReference Include="Umbraco.Cms.Targets" Version="13.3.2" />
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="13.3.2" />
-    <PackageReference Include="Umbraco.Cms.Web.Website" Version="13.3.2" />
-    <PackageReference Include="uSync" Version="13.2.2" />
+    <PackageReference Include="Umbraco.Cms" Version="14.0.0" />
+    <PackageReference Include="Umbraco.Cms.Api.Delivery" Version="14.0.0" />
+    <PackageReference Include="Umbraco.Cms.PublishedCache.NuCache" Version="14.0.0" />
     <ProjectReference Include="..\Oazis.BLL\Oazis.BLL.csproj" />
     <RuntimeHostConfigurationOption Include="System.Globalization.AppLocalIcu" Value="72.1.0.3" Condition="$(RuntimeIdentifier.StartsWith('linux')) or $(RuntimeIdentifier.StartsWith('win')) or ('$(RuntimeIdentifier)' == '' and !$([MSBuild]::IsOSPlatform('osx')))" />
   </ItemGroup>
