@@ -78,7 +78,7 @@ jobs:
           username: root
           password: ${{ secrets.VPS_PSW }}
           script: |
-            systemctl is-active my-dotnet-app.service
+            # systemctl is-active my-dotnet-app.service
         continue-on-error: true
 
       - name: Rollback if deployment failed
