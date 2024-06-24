@@ -1,31 +1,62 @@
 name: Deploy to Ubuntu VPS
+
 on:
   workflow_dispatch:
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Set up .NET
-        uses: actions/setup-dotnet@v3 
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
+          
+      - name: Install SSHPass
+        run: sudo apt-get install sshpass
+
       - name: Restore dependencies
         run: dotnet restore
+
       - name: Build .NET project
         run: dotnet build -c Release
+
       - name: Publish .NET project
-        run: dotnet publish -c Release -o ./publish
+        run: dotnet publish -c Release -o ./oazis-api
+
+      - name: Backup current project directory
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.VPS_ADDRESS }}
+          username: root
+          password: ${{ secrets.VPS_PSW }}
+          script: |
+            cp -r /var/www/oazis-api /var/www/oazis-api_backup
+
+      - name: Clean target directory on VPS
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.VPS_ADDRESS }}
+          username: root
+          password: ${{ secrets.VPS_PSW }}
+          script: |
+            rm -rf /var/www/oazis-api/*
+
       - name: Copy files via SSH
         uses: appleboy/scp-action@v0.1.3
         with:
           host: ${{ secrets.VPS_ADDRESS }}
           username: root
           password: ${{ secrets.VPS_PSW }}
-          source: "./publish/*"
+          source: "./oazis-api/*"
           target: "/var/www/oazis-api/"
+
       - name: Restart .NET application
+        id: restart_service
         uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.VPS_ADDRESS }}
@@ -33,3 +64,37 @@ jobs:
           password: ${{ secrets.VPS_PSW }}
           script: |
             systemctl restart my-dotnet-app.service
+        continue-on-error: true
+
+      - name: Check if deployment succeeded
+        id: check_status
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.VPS_ADDRESS }}
+          username: root
+          password: ${{ secrets.VPS_PSW }}
+          script: |
+            systemctl is-active my-dotnet-app.service
+        continue-on-error: true
+
+      - name: Rollback if deployment failed
+        if: steps.check_status.outcome == 'failure'
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.VPS_ADDRESS }}
+          username: root
+          password: ${{ secrets.VPS_PSW }}
+          script: |
+            rm -rf /var/www/oazis-api
+            mv /var/www/oazis-api_backup /var/www/oazis-api
+            # systemctl restart my-dotnet-app.service
+
+      # - name: Cleanup backup after successful deployment
+      #   if: steps.check_status.outcome == 'success'
+      #   uses: appleboy/ssh-action@v0.1.4
+      #   with:
+      #     host: ${{ secrets.VPS_ADDRESS }}
+      #     username: root
+      #     password: ${{ secrets.VPS_PSW }}
+      #     script: |
+      #       rm -rf /var/www/oazis-api_backup
