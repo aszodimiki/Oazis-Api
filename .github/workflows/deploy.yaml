@@ -57,7 +57,7 @@ jobs:
           username: root
           password: ${{ secrets.VPS_PSW }}
           source: "./oazis-api/*"
-          target: "/var/www/oazis-api/"
+          target: "/var/www/"
 
       - name: Restart .NET application
         id: restart_service
