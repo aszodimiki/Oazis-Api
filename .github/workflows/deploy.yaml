@@ -95,14 +95,14 @@ jobs:
               # systemctl restart my-dotnet-app.service
             fi
 
-      # - name: Cleanup backup after successful deployment
-      #   if: steps.check_status.outcome == 'success'
-      #   uses: appleboy/ssh-action@v0.1.4
-      #   with:
-      #     host: ${{ secrets.VPS_ADDRESS }}
-      #     username: root
-      #     password: ${{ secrets.VPS_PSW }}
-      #     script: |
-      #       if [ -d /var/www/oazis-api_backup ]; then
-      #         rm -rf /var/www/oazis-api_backup
-      #       fi
+      - name: Cleanup backup after successful deployment
+        if: steps.check_status.outcome == 'success'
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.VPS_ADDRESS }}
+          username: root
+          password: ${{ secrets.VPS_PSW }}
+          script: |
+            if [ -d /var/www/oazis-api_backup ]; then
+              rm -rf /var/www/oazis-api_backup
+            fi
