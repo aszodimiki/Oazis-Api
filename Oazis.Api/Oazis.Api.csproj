@@ -4,6 +4,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="wwwroot\media\113lmwnp\20230420_111635.jpg" />
+    <Content Include="wwwroot\media\5ipfrwr3\20230131_135455.jpg" />
+    <Content Include="wwwroot\media\atcn5qab\facebook_logo.png" />
+    <Content Include="wwwroot\media\odofdvvi\20230131_135531.jpg" />
+    <Content Include="wwwroot\media\se3oznfe\insta.png" />
+    <Content Include="wwwroot\media\wgrjmkmt\20230420_111635.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\media\mcrgjpw1\carousel_background.svg" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
