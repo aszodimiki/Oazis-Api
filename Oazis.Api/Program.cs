@@ -1,5 +1,6 @@
 
 
+using Microsoft.Data.Sqlite;
 using Oazis.Domain.Mappings;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -28,6 +29,22 @@ builder.Services.AddCors(options =>
 WebApplication app = builder.Build();
 var env = app.Services.GetRequiredService<IHostEnvironment>();
 Console.WriteLine($"Environment!!!: {env.EnvironmentName}");
+
+string connectionString = "Data Source=/var/www/data/OazisDB.db;Cache=Shared;Foreign Keys=True;Pooling=True";
+
+using (var connection = new SqliteConnection(connectionString))
+{
+    try
+    {
+        connection.Open();
+        Console.WriteLine("Database connection successful.");
+    }
+    catch (SqliteException ex)
+    {
+        Console.WriteLine($"SQLite error: {ex.Message}");
+    }
+}
+
 await app.BootUmbracoAsync();
 
 app.UseCors(builder =>
