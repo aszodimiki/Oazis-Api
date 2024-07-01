@@ -26,7 +26,8 @@ builder.Services.AddCors(options =>
     ));
 
 WebApplication app = builder.Build();
-
+var env = app.Services.GetRequiredService<IHostEnvironment>();
+Console.WriteLine($"Environment!!!: {env.EnvironmentName}");
 await app.BootUmbracoAsync();
 
 app.UseCors(builder =>
