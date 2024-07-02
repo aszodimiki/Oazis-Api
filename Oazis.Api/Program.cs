@@ -1,5 +1,6 @@
 
 
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Data.Sqlite;
 using Oazis.Domain.Mappings;
 
@@ -27,6 +28,10 @@ builder.Services.AddCors(options =>
     ));
 
 WebApplication app = builder.Build();
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
 var env = app.Services.GetRequiredService<IHostEnvironment>();
 Console.WriteLine($"Environment!!!: {env.EnvironmentName}");
 
