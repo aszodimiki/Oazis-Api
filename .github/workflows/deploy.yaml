@@ -67,7 +67,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PSW }}
           script: |
-            # systemctl restart oazis-api.service
+            systemctl restart oazis-api.service
         continue-on-error: true
 
       - name: Check if deployment succeeded
@@ -78,7 +78,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PSW }}
           script: |
-            # systemctl is-active oazis-api.service
+            systemctl is-active oazis-api.service
         continue-on-error: true
 
       - name: Rollback if deployment failed
@@ -92,7 +92,7 @@ jobs:
             if [ -d /var/www/oazis-api_backup ]; then
               rm -rf /var/www/oazis-api
               mv /var/www/oazis-api_backup /var/www/oazis-api
-              # systemctl restart oazis-api.service
+              systemctl restart oazis-api.service
             fi
 
       - name: Cleanup backup after successful deployment
