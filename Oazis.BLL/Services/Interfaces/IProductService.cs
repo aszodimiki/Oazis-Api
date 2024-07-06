@@ -1,6 +1,5 @@
-﻿using Oazis.Domain.Models.Product;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Oazis.Domain.Models;
+using Oazis.Domain.Models.Product;
 
 namespace Oazis.BLL.Services.Interfaces
 {
@@ -8,5 +7,7 @@ namespace Oazis.BLL.Services.Interfaces
     {
         Task<List<ProductTypeDTO>> GetProductTypes();
         Task<List<ProductDto>> GetProductsByType(string type);
+        Task<List<DrinkTypeDto>> GetDrinkTypes();
+        Task<List<DrinkDto>> GetDrinksByType(string type);
     }
 }

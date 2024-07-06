@@ -24,6 +24,22 @@ namespace Oazis.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("drink-types")]
+        public async Task<IActionResult> GetDrinkTypes()
+        {
+            var result = await productService.GetDrinkTypes();
+
+            return Ok(result);
+        }
+
+        [HttpGet("drink-types/{type}")]
+        public async Task<IActionResult> GetDrinksByType(string type)
+        {
+            var result = await productService.GetDrinksByType(type);
+
+            return Ok(result);
+        }
+
         [HttpGet("weekly")]
         public async Task<IActionResult> GetWeeklyMenu()
         {

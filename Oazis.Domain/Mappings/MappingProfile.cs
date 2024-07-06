@@ -15,14 +15,18 @@ namespace Oazis.Domain.Mappings
         {
             CreateMap<Ingredient, IngredientDTO>();
 
-            CreateMap<ModelsBuilder.Product, ProductDto>()
+            CreateMap<Product, ProductDto>()
                 .ForMember(q => q.Ingredients, y => y.MapFrom(t => t.Ingredients != null && t.Ingredients.Any() ? t.Ingredients.Select(x => x.Name) : Enumerable.Empty<string>()))
                 .ForMember(q => q.SerialNumber, y => y.MapFrom(t => t.SerialNumber != null ? t.SerialNumber : 0))
                 .ForMember(q => q.SecondPrice, y => y.MapFrom(t => t.SecondPrice != null ? t.SecondPrice : 0));
 
             CreateMap<ProductType, ProductTypeDTO>()
-                .ForMember(q => q.NameOfProduct, y => y.MapFrom(t => t.Name))
-                .ForMember(q => q.TypeImageUrl, y => y.MapFrom(t => t.ProductImage.LocalCrops));
+                .ForMember(q => q.NameOfProduct, y => y.MapFrom(t => t.Name));
+
+            CreateMap<Drink, DrinkDto>();
+
+            CreateMap<DrinkType, DrinkTypeDto>()
+                .ForMember(q => q.NameOfProduct, y => y.MapFrom(t => t.Name));
 
             CreateMap<Information, InformationsDTO>();
 

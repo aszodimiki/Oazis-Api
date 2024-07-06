@@ -63,12 +63,5 @@ namespace Oazis.Domain.ModelsBuilder
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.0.0+8685c7d")]
 		[ImplementPropertyType("price")]
 		public virtual int Price => this.Value<int>(_publishedValueFallback, "price");
-
-		///<summary>
-		/// Second Price
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "14.0.0+8685c7d")]
-		[ImplementPropertyType("secondPrice")]
-		public virtual int SecondPrice => this.Value<int>(_publishedValueFallback, "secondPrice");
 	}
 }
