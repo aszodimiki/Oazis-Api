@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.HttpOverrides;
+using Oazis.BLL.Middlewares;
 using Oazis.Domain.Mappings;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,7 @@ builder.Services.AddCors(options =>
     ));
 
 WebApplication app = builder.Build();
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
