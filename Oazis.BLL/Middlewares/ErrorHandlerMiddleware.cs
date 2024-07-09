@@ -5,10 +5,10 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using Oazis.Domain.Exceptions;
 using Oazis.Domain.Helpers;
 using Oazis.Domain.Models;
 using System.Net;
-using Oazis.Domain.Exceptions;
 
 namespace Oazis.BLL.Middlewares
 {
@@ -29,9 +29,10 @@ namespace Oazis.BLL.Middlewares
 
                 switch (error)
                 {
-
+                    case NotFoundException:
+                        response.StatusCode = (int)HttpStatusCode.NoContent;
+                        break;
                     case NoContentException:
-                        // no content error
                         response.StatusCode = (int)HttpStatusCode.NoContent;
                         break;
                     default:
