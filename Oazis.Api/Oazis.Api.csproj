@@ -18,28 +18,27 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Opt-in to app-local ICU to ensure consistent globalization APIs across different platforms -->
     <PackageReference Include="Microsoft.ICU.ICU4C.Runtime" Version="72.1.0.3" />
-    <PackageReference Include="Umbraco.Cms" Version="14.0.0" />
-    <PackageReference Include="Umbraco.Cms.Api.Delivery" Version="14.0.0" />
-    <PackageReference Include="Umbraco.Cms.PublishedCache.NuCache" Version="14.0.0" />
-    <PackageReference Include="uSync" Version="14.0.1-preview001" />
-    <PackageReference Include="uSync.BackOffice" Version="14.0.1-preview001" />
+    <PackageReference Include="Umbraco.Cms" Version="14.1.0" />
+    <PackageReference Include="Umbraco.Cms.Api.Delivery" Version="14.1.0" />
+    <PackageReference Include="Umbraco.Cms.PublishedCache.NuCache" Version="14.1.0" />
+    <PackageReference Include="uSync" Version="14.0.0" />
     <ProjectReference Include="..\Oazis.BLL\Oazis.BLL.csproj" />
     <RuntimeHostConfigurationOption Include="System.Globalization.AppLocalIcu" Value="72.1.0.3" Condition="$(RuntimeIdentifier.StartsWith('linux')) or $(RuntimeIdentifier.StartsWith('win')) or ('$(RuntimeIdentifier)' == '' and !$([MSBuild]::IsOSPlatform('osx')))" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="App_Plugins\" />
-  </ItemGroup>
+	<ItemGroup>
+	  <Folder Include="App_Plugins\" />
+	</ItemGroup>
 
   <PropertyGroup>
     <!-- Razor files are needed for the backoffice to work correctly -->
