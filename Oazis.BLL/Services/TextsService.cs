@@ -16,14 +16,12 @@ namespace Oazis.BLL.Services
         private readonly IPublishedValueFallback _publishedValueFallback;
         private readonly ISiteService _siteService;
         private readonly IMapper _mapper;
-        private readonly IPublishedSnapshotAccessor _publishedSnapshotAccessor;
 
-        public TextsService(IMapper mapper, ISiteService siteService, IPublishedValueFallback publishedValueFallback, IPublishedSnapshotAccessor publishedSnapshotAccessor)
+        public TextsService(IMapper mapper, ISiteService siteService, IPublishedValueFallback publishedValueFallback)
         {
             _mapper = mapper;
             _siteService = siteService;
             _publishedValueFallback = publishedValueFallback;
-            _publishedSnapshotAccessor = publishedSnapshotAccessor;
         }
 
 

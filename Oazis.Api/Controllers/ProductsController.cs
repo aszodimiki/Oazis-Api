@@ -6,7 +6,7 @@ namespace Oazis.Api.Controllers
     [Route("api/products")]
     [ApiController]
     public class ProductsController(IProductService productService, IWeeklyService weeklyService)
-        : ControllerBase
+        : Controller
     {
         [HttpGet("product-types")]
         public async Task<IActionResult> GetProductTypes()
