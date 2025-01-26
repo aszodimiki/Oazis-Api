@@ -23,10 +23,10 @@ jobs:
         run: dotnet restore
 
       - name: Build .NET project
-        run: dotnet build -c Release
+        run: dotnet build -c Release /p:EnvironmentName=Production
 
       - name: Publish .NET project
-        run: dotnet publish -c Release -o ./oazis-api
+        run: dotnet publish -c Release /p:EnvironmentName=Production -o ./oazis-api
 
       - name: Backup current project directory
         uses: appleboy/ssh-action@v0.1.4
