@@ -41,7 +41,7 @@ app.UseCors(builder =>
         .AllowAnyHeader();
 });
 
-app.UseAuthorization();
+
 app.UseUmbraco()
     .WithMiddleware(u =>
     {
@@ -54,5 +54,8 @@ app.UseUmbraco()
         u.UseBackOfficeEndpoints();
         u.UseWebsiteEndpoints();
     });
+
+app.UseAuthorization();
+app.UseCertificateForwarding();
 
 await app.RunAsync();
